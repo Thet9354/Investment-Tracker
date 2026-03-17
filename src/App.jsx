@@ -432,7 +432,7 @@ export default function PortfolioTracker() {
       {/* Dot grid bg */}
       <div style={{ position: "fixed", inset: 0, zIndex: 0, backgroundImage: `radial-gradient(${C.border}55 1px, transparent 1px)`, backgroundSize: "32px 32px", pointerEvents: "none" }} />
 
-      <div className="main-container" style={{ position: "relative", zIndex: 1, maxWidth: 1280, margin: "0 auto", padding: "20px 16px" }}>
+      <div className="main-container" style={{ position: "relative", zIndex: 1, maxWidth: 1600, margin: "0 auto", padding: "20px 32px" }}>
 
         {/* ═══ HEADER ═══ */}
         <div style={{
@@ -547,7 +547,7 @@ export default function PortfolioTracker() {
 
         {/* ═══ CHARTS ROW ═══ */}
         <div className="charts-row" style={{
-          display: "grid", gridTemplateColumns: "1fr 280px", gap: 14, marginBottom: 16,
+          display: "grid", gridTemplateColumns: "1fr 320px", gap: 14, marginBottom: 16,
           opacity: animIn ? 1 : 0, transition: "all 0.5s cubic-bezier(.16,1,.3,1) 0.15s",
         }}>
           {/* Main Chart */}
@@ -1090,6 +1090,7 @@ export default function PortfolioTracker() {
 
         /* ═══ RESPONSIVE ═══ */
         @media (max-width: 1023px) {
+          .main-container { padding: 16px !important; }
           .charts-row { grid-template-columns: 1fr !important; }
           .portfolio-value { font-size: 28px !important; }
           .totals-card { padding: 16px !important; }
