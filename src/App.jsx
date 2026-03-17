@@ -140,7 +140,7 @@ export default function PortfolioTracker() {
   const [currentPrices, setCurrentPrices] = useState(SAMPLE_PRICES);
   const [watchlist, setWatchlist] = useState(SAMPLE_WATCHLIST);
   const [goal, setGoal] = useState({ target: 50000, label: "Portfolio Goal" });
-  const [currency, setCurrency] = useState("USD");
+  const [currency, setCurrency] = useState("SGD");
   const [activeTab, setActiveTab] = useState("overview");
   const [chartType, setChartType] = useState("area");
   const [timeRange, setTimeRange] = useState("all");
@@ -987,7 +987,7 @@ export default function PortfolioTracker() {
             {[
               { k: "name", l: "Asset Name", ph: "e.g. AAPL, BTC, Gold Bar", t: "text" },
               { k: "qty", l: "Quantity", ph: "0.00", t: "number" },
-              { k: "price", l: "Price per Unit (USD)", ph: "0.00", t: "number" },
+              { k: "price", l: `Price per Unit (${currency})`, ph: "0.00", t: "number" },
               { k: "date", l: "Date", t: "date" },
               { k: "notes", l: "Notes (optional)", ph: "Any notes...", t: "text" },
             ].map(f => (
