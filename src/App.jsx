@@ -432,7 +432,7 @@ export default function PortfolioTracker() {
       {/* Dot grid bg */}
       <div style={{ position: "fixed", inset: 0, zIndex: 0, backgroundImage: `radial-gradient(${C.border}55 1px, transparent 1px)`, backgroundSize: "32px 32px", pointerEvents: "none" }} />
 
-      <div style={{ position: "relative", zIndex: 1, maxWidth: 1280, margin: "0 auto", padding: "20px 16px" }}>
+      <div className="main-container" style={{ position: "relative", zIndex: 1, maxWidth: 1280, margin: "0 auto", padding: "20px 16px" }}>
 
         {/* ═══ HEADER ═══ */}
         <div style={{
@@ -448,7 +448,7 @@ export default function PortfolioTracker() {
               Investment Tracker
             </h1>
           </div>
-          <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+          <div className="header-actions" style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
             {/* Currency Toggle */}
             <div style={{ display: "flex", background: C.card, border: `1px solid ${C.border}`, borderRadius: 8, overflow: "hidden" }}>
               {["USD", "SGD"].map(c => (
@@ -473,7 +473,7 @@ export default function PortfolioTracker() {
         </div>
 
         {/* ═══ GOAL BAR ═══ */}
-        <div style={{
+        <div className="goal-bar" style={{
           background: C.card, border: `1px solid ${C.border}`, borderRadius: 12, padding: "14px 20px", marginBottom: 16,
           display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap",
           opacity: animIn ? 1 : 0, transition: "all 0.5s cubic-bezier(.16,1,.3,1) 0.05s",
@@ -503,7 +503,7 @@ export default function PortfolioTracker() {
         </div>
 
         {/* ═══ TOTALS CARD ═══ */}
-        <div style={{
+        <div className="totals-card" style={{
           background: `linear-gradient(135deg, ${C.card}, #0c1220)`, border: `1px solid ${C.border}`,
           borderRadius: 16, padding: "20px 24px", marginBottom: 16,
           opacity: animIn ? 1 : 0, transition: "all 0.5s cubic-bezier(.16,1,.3,1) 0.1s",
@@ -511,7 +511,7 @@ export default function PortfolioTracker() {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12 }}>
             <div>
               <span style={{ fontSize: 11, color: C.textDim, textTransform: "uppercase", letterSpacing: 1.5, fontWeight: 500 }}>Total Portfolio Value</span>
-              <div style={{ fontSize: 36, fontWeight: 700, fontFamily: "'JetBrains Mono', monospace", marginTop: 2, letterSpacing: -1 }}>
+              <div className="portfolio-value" style={{ fontSize: 36, fontWeight: 700, fontFamily: "'JetBrains Mono', monospace", marginTop: 2, letterSpacing: -1 }}>
                 {fmt(totals.total, currency)}
               </div>
               <div style={{ display: "flex", gap: 8, marginTop: 4, alignItems: "center" }}>
@@ -526,7 +526,7 @@ export default function PortfolioTracker() {
             </div>
           </div>
           {/* Category Breakdown */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 12, marginTop: 18 }}>
+          <div className="category-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 12, marginTop: 18 }}>
             {CATS.map(({ key, label, color, bg, icon }) => (
               <div key={key} style={{ background: bg, borderRadius: 10, padding: "12px 14px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <div>
@@ -546,7 +546,7 @@ export default function PortfolioTracker() {
         </div>
 
         {/* ═══ CHARTS ROW ═══ */}
-        <div style={{
+        <div className="charts-row" style={{
           display: "grid", gridTemplateColumns: "1fr 280px", gap: 14, marginBottom: 16,
           opacity: animIn ? 1 : 0, transition: "all 0.5s cubic-bezier(.16,1,.3,1) 0.15s",
         }}>
@@ -640,7 +640,7 @@ export default function PortfolioTracker() {
         </div>
 
         {/* ═══ TAB NAV ═══ */}
-        <div style={{
+        <div className="tab-nav" style={{
           display: "flex", gap: 3, marginBottom: 14, background: C.card, borderRadius: 10, padding: 3,
           border: `1px solid ${C.border}`, overflowX: "auto",
           opacity: animIn ? 1 : 0, transition: "all 0.5s cubic-bezier(.16,1,.3,1) 0.2s",
@@ -649,7 +649,7 @@ export default function PortfolioTracker() {
             const isActive = activeTab === t.key;
             const catColor = CATS.find(c => c.key === t.key)?.color || C.accent;
             return (
-              <button key={t.key} onClick={() => { setActiveTab(t.key); setSearchQuery(""); setFilterTag("all"); setFilterType("all"); }}
+              <button key={t.key} className="tab-btn" onClick={() => { setActiveTab(t.key); setSearchQuery(""); setFilterTag("all"); setFilterType("all"); }}
                 style={{
                   flex: 1, padding: "9px 12px", border: "none", borderRadius: 7, minWidth: 70,
                   background: isActive ? catColor + "18" : "transparent",
@@ -665,7 +665,7 @@ export default function PortfolioTracker() {
 
           {/* OVERVIEW */}
           {activeTab === "overview" && (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 14 }}>
+            <div className="overview-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 14 }}>
               {CATS.map(({ key, label, color, bg, icon }) => (
                 <div key={key} style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 14, padding: 18, position: "relative", overflow: "hidden" }}>
                   <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg, ${color}, transparent)` }} />
@@ -737,7 +737,7 @@ export default function PortfolioTracker() {
 
               {/* Asset P&L Summary */}
               {netPositions[activeTab].length > 0 && (
-                <div style={{ padding: "10px 16px", borderBottom: `1px solid ${C.border}`, display: "flex", gap: 8, flexWrap: "wrap" }}>
+                <div className="asset-summary" style={{ padding: "10px 16px", borderBottom: `1px solid ${C.border}`, display: "flex", gap: 8, flexWrap: "wrap" }}>
                   {netPositions[activeTab].map(a => (
                     <div key={a.name} style={{
                       background: catForTab.bg, borderRadius: 8, padding: "8px 12px", flex: "1 1 auto", minWidth: 130, cursor: "pointer", position: "relative",
@@ -779,7 +779,7 @@ export default function PortfolioTracker() {
                 </div>
               ) : (
                 <div style={{ overflowX: "auto" }}>
-                  <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
+                  <table className="tx-table" style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
                     <thead>
                       <tr style={{ borderBottom: `1px solid ${C.border}` }}>
                         {[
@@ -877,7 +877,7 @@ export default function PortfolioTracker() {
                   <button onClick={() => setShowModal("watchlist")} style={{ ...btnSm(C.accent), marginTop: 8, padding: "8px 20px" }}>Add your first asset</button>
                 </div>
               ) : (
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 10, padding: 14 }}>
+                <div className="watchlist-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 10, padding: 14 }}>
                   {watchlist.map(w => {
                     const cat = CATS.find(c => c.key === w.category);
                     return (
@@ -913,7 +913,7 @@ export default function PortfolioTracker() {
                 <div style={{ textAlign: "center", padding: "40px", color: C.textDim }}>No data yet</div>
               ) : (
                 <div style={{ overflowX: "auto" }}>
-                  <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
+                  <table className="summary-table" style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
                     <thead>
                       <tr style={{ borderBottom: `1px solid ${C.border}` }}>
                         {["Month", "Invested", "Sold", "Net", "Stocks", "Gold", "Crypto", "Txns"].map((h, i) => (
@@ -951,7 +951,7 @@ export default function PortfolioTracker() {
       {(showModal === "add" || showModal === "edit") && (
         <div style={{ position: "fixed", inset: 0, zIndex: 100, background: "rgba(0,0,0,0.7)", backdropFilter: "blur(8px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}
           onClick={resetForm}>
-          <div onClick={e => e.stopPropagation()} style={{
+          <div className="modal-content" onClick={e => e.stopPropagation()} style={{
             background: C.card, border: `1px solid ${C.border}`, borderRadius: 18, padding: 24, width: "100%", maxWidth: 420,
             boxShadow: "0 24px 48px rgba(0,0,0,0.6)", maxHeight: "90vh", overflowY: "auto",
           }}>
@@ -1038,7 +1038,7 @@ export default function PortfolioTracker() {
       {showModal === "watchlist" && (
         <div style={{ position: "fixed", inset: 0, zIndex: 100, background: "rgba(0,0,0,0.7)", backdropFilter: "blur(8px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}
           onClick={() => setShowModal(null)}>
-          <div onClick={e => e.stopPropagation()} style={{
+          <div className="modal-content" onClick={e => e.stopPropagation()} style={{
             background: C.card, border: `1px solid ${C.border}`, borderRadius: 18, padding: 24, width: "100%", maxWidth: 380,
             boxShadow: "0 24px 48px rgba(0,0,0,0.6)",
           }}>
@@ -1087,6 +1087,34 @@ export default function PortfolioTracker() {
         ::-webkit-scrollbar{width:5px;height:5px}
         ::-webkit-scrollbar-track{background:transparent}
         ::-webkit-scrollbar-thumb{background:${C.border};border-radius:3px}
+
+        /* ═══ RESPONSIVE ═══ */
+        @media (max-width: 1023px) {
+          .charts-row { grid-template-columns: 1fr !important; }
+          .portfolio-value { font-size: 28px !important; }
+          .totals-card { padding: 16px !important; }
+        }
+
+        @media (max-width: 639px) {
+          .main-container { padding: 12px 8px !important; }
+          .header-actions { width: 100% !important; }
+          .goal-bar { padding: 12px 14px !important; gap: 10px !important; }
+          .portfolio-value { font-size: 22px !important; }
+          .category-grid { grid-template-columns: 1fr !important; }
+          .charts-row { grid-template-columns: 1fr !important; }
+          .tab-nav { flex-wrap: wrap !important; overflow-x: visible !important; }
+          .tab-btn { min-width: 0 !important; flex: 1 1 calc(33.33% - 4px) !important; padding: 7px 6px !important; font-size: 10px !important; }
+          .overview-grid { grid-template-columns: 1fr !important; }
+          .asset-summary > div { min-width: 100% !important; }
+          .tx-table th:nth-child(7), .tx-table td:nth-child(7),
+          .tx-table th:nth-child(8), .tx-table td:nth-child(8) { display: none !important; }
+          .tx-table th, .tx-table td { padding: 8px 6px !important; font-size: 11px !important; }
+          .watchlist-grid { grid-template-columns: 1fr !important; }
+          .summary-table th:nth-child(n+5):nth-child(-n+7),
+          .summary-table td:nth-child(n+5):nth-child(-n+7) { display: none !important; }
+          .summary-table th, .summary-table td { padding: 8px 6px !important; }
+          .modal-content { padding: 16px !important; border-radius: 14px !important; }
+        }
       `}</style>
     </div>
   );
