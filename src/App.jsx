@@ -327,7 +327,8 @@ export default function PortfolioTracker() {
   /* ─── ACTIONS ─── */
   function handleAddTx() {
     if (!formData.name || !formData.qty || !formData.price) return;
-    const entry = { id: uid(), name: formData.name.toUpperCase(), type: formData.type, qty: parseFloat(formData.qty), price: parseFloat(formData.price), date: formData.date, notes: formData.notes, tags: formData.tags };
+    const priceInUSD = currency === "SGD" ? parseFloat(formData.price) / EXCHANGE_RATE : parseFloat(formData.price);
+    const entry = { id: uid(), name: formData.name.toUpperCase(), type: formData.type, qty: parseFloat(formData.qty), price: priceInUSD, date: formData.date, notes: formData.notes, tags: formData.tags };
     setHoldings(p => ({ ...p, [formData.category]: [...p[formData.category], entry] }));
     toast(`${formData.type === "buy" ? "Bought" : "Sold"} ${formData.name.toUpperCase()} added`);
     resetForm();
@@ -335,7 +336,8 @@ export default function PortfolioTracker() {
 
   function handleEditTx() {
     if (!formData.name || !formData.qty || !formData.price) return;
-    const updated = { ...editItem, name: formData.name.toUpperCase(), type: formData.type, qty: parseFloat(formData.qty), price: parseFloat(formData.price), date: formData.date, notes: formData.notes, tags: formData.tags };
+    const priceInUSD = currency === "SGD" ? parseFloat(formData.price) / EXCHANGE_RATE : parseFloat(formData.price);
+    const updated = { ...editItem, name: formData.name.toUpperCase(), type: formData.type, qty: parseFloat(formData.qty), price: priceInUSD, date: formData.date, notes: formData.notes, tags: formData.tags };
     setHoldings(p => ({ ...p, [formData.category]: p[formData.category].map(h => h.id === editItem.id ? updated : h) }));
     toast("Transaction updated");
     resetForm();
@@ -391,7 +393,8 @@ export default function PortfolioTracker() {
 
   function openEdit(cat, item) {
     setEditItem(item);
-    setFormData({ name: item.name, type: item.type, qty: item.qty.toString(), price: item.price.toString(), date: item.date, notes: item.notes || "", tags: item.tags || [], category: cat });
+    const displayPrice = currency === "SGD" ? (item.price * EXCHANGE_RATE).toFixed(2) : item.price.toString();
+    setFormData({ name: item.name, type: item.type, qty: item.qty.toString(), price: displayPrice, date: item.date, notes: item.notes || "", tags: item.tags || [], category: cat });
     setShowModal("edit");
   }
 
